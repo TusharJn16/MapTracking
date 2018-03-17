@@ -254,7 +254,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                             .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
 
 
-                                    mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney[i]));
+                                    mMap.moveCamera(CameraUpdateFactory.newLatLng(lng));
 
                                     i++;
                                 }
