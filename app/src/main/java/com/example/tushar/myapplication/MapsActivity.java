@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -123,7 +124,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .position(latLng)
                 .title("This is my title")
                 .snippet("and snippet")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         Toast.makeText(this, latLng.toString(), Toast.LENGTH_SHORT).show();
 
@@ -223,38 +224,46 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             // for ActivityCompat#requestPermissions for more details.
             mMap.setMyLocationEnabled(true);
         }
-
-        mref.addValueEventListener(new ValueEventListener() {
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                i=0;
-                for(DataSnapshot snapshot:dataSnapshot.getChildren())
-                {
+            public void run() {
+                mref.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        i=0;
+                        for(DataSnapshot snapshot:dataSnapshot.getChildren())
+                        {
 
-                    String s=snapshot.child("Lat").getValue().toString();
-                    String s1=snapshot.child("Long").getValue().toString();
+                            String s=snapshot.child("Lat").getValue().toString();
+                            String s1=snapshot.child("Long").getValue().toString();
 //                    String s2=snapshot.child("Place").getValue().toString();
 
-                    sydney[i]=new LatLng(Double.parseDouble(s),Double.parseDouble(s1));
+                            sydney[i]=new LatLng(Double.parseDouble(s),Double.parseDouble(s1));
 
-                    mMap.addMarker(new MarkerOptions().position(sydney[i]).title(Integer.toString(i)));
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney[i]));
+                           // mMap.addMarker(new MarkerOptions().position(sydney[i]).title(Integer.toString(i)));
+                            mMap.addMarker(new MarkerOptions()
+                                    .position(sydney[i])
+                                    .title(Integer.toString(i))
+                                    .snippet("and snippet")
+                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
 
-                    i++;
-                }
+
+                            mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney[i]));
+
+                            i++;
+                        }
 
 
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
             }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-
-
-
+        },3000);
 
 //        sydney[0] = new LatLng(24.5854, 73.7125);
 //        mMap.addMarker(new MarkerOptions().position(sydney[0]).title("Marker in Sydney"));
@@ -262,6 +271,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //        sydney[1] = new LatLng(34, 34);
 //        mMap.addMarker(new MarkerOptions().position(sydney[1]).title("Marker in fffff"));
 //        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney[1]));
+    }
+
+    @Override
+    protected void onStop() {
+
+        super.onStop();
+        super.onStop();
+
+
     }
 
     @Override
