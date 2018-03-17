@@ -200,6 +200,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             key=ref.getKey().toString();
                             ref.child("Lat").setValue(s);
                             ref.child("Long").setValue(s1);
+                            ref.child("Place").setValue(key);
 
                             //ref.child("Place").setValue(ref.toString());
                         }
@@ -230,29 +231,37 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void run() {
                 mref.addValueEventListener(new ValueEventListener() {
                     @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
+                    public void onDataChange(final DataSnapshot dataSnapshot) {
                         i=0;
-                        for(DataSnapshot snapshot:dataSnapshot.getChildren())
-                        {
+                        final Handler handler1=new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                for(DataSnapshot snapshot:dataSnapshot.getChildren())
+                                {
 
-                            String s=snapshot.child("Lat").getValue().toString();
-                            String s1=snapshot.child("Long").getValue().toString();
-//                    String s2=snapshot.child("Place").getValue().toString();
+                                    String s=snapshot.child("Lat").getValue().toString();
+                                    String s1=snapshot.child("Long").getValue().toString();
+                                    String s2=snapshot.child("Place").getValue().toString();
 
-                            sydney[i]=new LatLng(Double.parseDouble(s),Double.parseDouble(s1));
+                                    sydney[i]=new LatLng(Double.parseDouble(s),Double.parseDouble(s1));
 
-                           // mMap.addMarker(new MarkerOptions().position(sydney[i]).title(Integer.toString(i)));
-                            mMap.addMarker(new MarkerOptions()
-                                    .position(sydney[i])
-                                    .title(Integer.toString(i))
-                                    .snippet("and snippet")
-                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+                                    // mMap.addMarker(new MarkerOptions().position(sydney[i]).title(Integer.toString(i)));
+                                    mMap.addMarker(new MarkerOptions()
+                                            .position(sydney[i])
+                                            .title(s2)
+                                            .snippet("and snippet")
+                                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
 
 
-                            mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney[i]));
+                                    mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney[i]));
 
-                            i++;
-                        }
+                                    i++;
+                                }
+                                sydney=null;
+                            }
+                        },3000);
+
 
 
                     }
@@ -263,7 +272,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     }
                 });
             }
-        },3000);
+        },5000);
 
 //        sydney[0] = new LatLng(24.5854, 73.7125);
 //        mMap.addMarker(new MarkerOptions().position(sydney[0]).title("Marker in Sydney"));
