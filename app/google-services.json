@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "261853179203",
+    "firebase_url": "https://maptracking-42bb4.firebaseio.com",
+    "project_id": "maptracking-42bb4",
+    "storage_bucket": "maptracking-42bb4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:261853179203:android:acc2e00644115cb7",
+        "android_client_info": {
+          "package_name": "com.example.tushar.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "261853179203-etjo51k6ad3kkscthrkqhnbphccqc9u9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tushar.myapplication",
+            "certificate_hash": "17f0195246b2d2ea7e459dba6c1fba6fcb0017c4"
+          }
+        },
+        {
+          "client_id": "261853179203-9gd7r3ej574q4n3pvu5ue12kuecknk5i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATeAAMmzUcSqjHL_AD_LLuDuuCyZcK06g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "261853179203-9gd7r3ej574q4n3pvu5ue12kuecknk5i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
