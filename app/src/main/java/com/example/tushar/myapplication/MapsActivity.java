@@ -260,7 +260,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 }
                                 sydney=null;
                             }
-                        },3000);
+                        },5000);
 
 
 
@@ -284,11 +284,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     protected void onStop() {
-
         super.onStop();
-        super.onStop();
-
-
+        dref.child(key).removeValue();
     }
 
     @Override
