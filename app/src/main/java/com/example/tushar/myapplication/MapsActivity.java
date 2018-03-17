@@ -244,11 +244,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     String s1=snapshot.child("Long").getValue().toString();
                                     String s2=snapshot.child("Place").getValue().toString();
 
-                                    sydney[i]=new LatLng(Double.parseDouble(s),Double.parseDouble(s1));
+                                    LatLng lng=new LatLng(Double.parseDouble(s),Double.parseDouble(s1));
 
                                     // mMap.addMarker(new MarkerOptions().position(sydney[i]).title(Integer.toString(i)));
                                     mMap.addMarker(new MarkerOptions()
-                                            .position(sydney[i])
+                                            .position(lng)
                                             .title(s2)
                                             .snippet("and snippet")
                                             .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
